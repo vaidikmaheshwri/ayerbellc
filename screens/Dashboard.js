@@ -1,7 +1,7 @@
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, TouchableHighlight, SafeAreaView, ScrollView, Dimensions, FlatList } from "react-native";
 import React, { useState } from "react";
-import Header from "../components/dashboard/Header";
-import Footer from "../components/Footer";
+
+
 const ScreenWidth = Dimensions.get("window").width;
 const clientList = [
   {
@@ -142,7 +142,7 @@ export default function Dashboard({ navigation }) {
         <View>
           <View style={{ flexDirection: "row", marginTop: 10, justifyContent: "space-between" }}>
             <Text style={{ fontSize: 20, left: 15 }}>Clients</Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("Clients")}>
               <Text style={{ color: "rgba(65, 172, 253, 1)", fontSize: 14, right: 20, top: 5 }}>View All</Text>
             </TouchableOpacity>
           </View>

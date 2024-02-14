@@ -10,8 +10,9 @@ import ForgotPassword from "./components/ForgotPassword";
 import OtpInput from "./components/OtpInput";
 import NewPassword from "./components/NewPassword";
 import Dashboard from "./screens/Dashboard";
-import Footer from "./components/Footer";
+
 import HomeStackNavigator from "./navigations/HomeStackNavigator";
+import DashboardStack from "./navigations/DashboardStack";
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -23,10 +24,10 @@ export default function App() {
     }, 3000);
   }, []);
   return (
-    <>
-      
+    
+      <NavigationContainer>
         {
-          isLoggedIn ? <NavigationContainer>
+          isLoggedIn ? 
             <Stack.Navigator>
           {isLoading ? (
             <Stack.Screen name="Splash" component={Splash} options={{ headerShown: false }} />
@@ -40,15 +41,15 @@ export default function App() {
             </Stack.Group>
           )}
         </Stack.Navigator>
-          </NavigationContainer> :<NavigationContainer>
-          <HomeStackNavigator/>
-            </NavigationContainer>
+           :
+          <DashboardStack/>
+            
         }
         
-
+        </NavigationContainer>
      
       
-    </>
+    
   );
 }
 
