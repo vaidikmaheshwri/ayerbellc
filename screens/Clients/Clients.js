@@ -1,4 +1,4 @@
-import { View, Text, FlatList, TouchableHighlight,Image } from "react-native";
+import { View, Text, FlatList, TouchableHighlight,Image, TouchableOpacity } from "react-native";
 import React from "react";
 
 const ClientsList = [
@@ -60,7 +60,7 @@ export default function Clients({navigation}) {
           data={ClientsList}
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
-            <TouchableHighlight onPress={()=>navigation.navigate('ClientDetails')}>
+            <TouchableOpacity onPress={()=>navigation.navigate('ClientDetails')}>
               <View style={{ 
                              backgroundColor:'rgba(238, 238, 238, 1)',
                              borderRadius:20,
@@ -88,7 +88,7 @@ export default function Clients({navigation}) {
                  </View>
                 
               </View>
-            </TouchableHighlight>
+            </TouchableOpacity>
           )}
           keyExtractor={(item) => item.index}
         />

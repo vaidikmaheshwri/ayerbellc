@@ -154,12 +154,12 @@ export default function Dashboard({ navigation }) {
               data={clientList.slice(0, 5)}
               showsHorizontalScrollIndicator={false}
               renderItem={({ item }) => (
-                <TouchableHighlight>
+                <TouchableOpacity onPress={()=>navigation.navigate('ClientDetails')}>
                   <View style={{ paddingRight: 15, flexDirection: "column", height: 200, gap: 4 }}>
                     <Image source={item.image} style={{ width: 145, height: 145 }} />
                     <Text style={{ fontSize: 14 }}>{item.name}</Text>
                   </View>
-                </TouchableHighlight>
+                </TouchableOpacity>
               )}
               keyExtractor={(item) => item.index}
             />
