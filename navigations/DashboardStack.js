@@ -16,6 +16,8 @@ import Notifications from "../screens/Notifications";
 import Profile from "../screens/Profile";
 import EventDetails from "../screens/EventDetails";
 import TaskDetails from "../screens/TaskDetails";
+import AddTask from "../screens/AddTask";
+import AddEvent from "../screens/AddEvent";
 
 const DashboardNativeStack = createNativeStackNavigator();
 
@@ -295,6 +297,20 @@ export default function DashboardStack({ navigation }) {
         <DashboardNativeStack.Screen
           name="TaskDetails"
           component={TaskDetails}
+          options={{
+            headerShown:false,
+          }}
+        />
+        <DashboardNativeStack.Screen
+          name="AddEvent"
+          component={AddEvent}
+          options={{
+            headerShown:false,
+          }}
+        />
+        <DashboardNativeStack.Screen
+          name="AddTask"
+          component={AddTask}
           options={{
             headerShown:false,
           }}
