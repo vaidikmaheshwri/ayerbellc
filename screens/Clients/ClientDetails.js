@@ -65,7 +65,7 @@ export default function ClientDetails({navigation}) {
                 gap: 15,
               }}
             >
-              <TouchableOpacity>
+              <TouchableOpacity onPress={()=>navigation.navigate('chatScreen')}>
                 <MaterialIcons
                   name="message"
                   size={24}

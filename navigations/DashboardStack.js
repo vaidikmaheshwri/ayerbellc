@@ -18,6 +18,7 @@ import EventDetails from "../screens/EventDetails";
 import TaskDetails from "../screens/TaskDetails";
 import AddTask from "../screens/AddTask";
 import AddEvent from "../screens/AddEvent";
+import ChatScreen from "../screens/ChatScreen";
 
 const DashboardNativeStack = createNativeStackNavigator();
 
@@ -311,6 +312,13 @@ export default function DashboardStack({ navigation }) {
         <DashboardNativeStack.Screen
           name="AddTask"
           component={AddTask}
+          options={{
+            headerShown:false,
+          }}
+        />
+        <DashboardNativeStack.Screen
+          name="chatScreen"
+          component={ChatScreen}
           options={{
             headerShown:false,
           }}

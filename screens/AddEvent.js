@@ -1,22 +1,60 @@
-import { View, Text, ScrollView, TextInput, Button, Pressable, TouchableOpacity } from "react-native";
+import { View, Text, ScrollView, TextInput, Button, Pressable, TouchableOpacity, StyleSheet } from "react-native";
 import React, { useEffect, useState } from "react";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Header from "../components/Header";
-import { AntDesign } from '@expo/vector-icons';
+
+import AntDesign from "@expo/vector-icons/AntDesign";
+import CustomDropdown from "../components/CustomDropDown";
+
+const cases = [
+  {
+    label: "Richard Miller Vs John",
+    value: 2,
+  },
+  {
+    label: "Richard Miller Vs John",
+    value: 3,
+  },
+  {
+    label: "Richard Miller Vs John",
+    value: 4,
+  },
+  {
+    label: "Richard Miller Vs John",
+    value: 5,
+  },
+  {
+    label: "Richard Miller Vs John",
+    value: 6,
+  },
+  {
+    label: "Richard Miller Vs John",
+    value: 7,
+  },
+  {
+    label: "Richard Miller Vs John",
+    value: 8,
+  },
+  {
+    label: "Richard Miller Vs John",
+    value: 9,
+  },
+  {
+    label: "Richard Miller Vs John",
+    value: 10,
+  },
+];
 export default function AddEvent({ navigation }) {
   const initialValues = {
     eventName: "",
     eventDescription: "",
-
-    eventTime: "",
-    eventCase: "",
-    eventClient: "",
   };
   const [eventData, setEventData] = useState(initialValues);
   const [selectedDate, setSelectedDate] = useState();
   const [datePickerVisible, setDatePickerVisible] = useState(false);
   const [selectedTime, setSelectedTime] = useState();
-  const [datePickerVisible1, setDatePickerVisible1] = useState(false);
+  const [timePickerVisible, setTimePickerVisible] = useState(false);
+
   const showDatePicker = () => {
     setDatePickerVisible(true);
   };
@@ -29,17 +67,17 @@ export default function AddEvent({ navigation }) {
     setSelectedDate(date);
     hideDatePicker();
   };
-  const showDatePicker1 = () => {
-    setDatePickerVisible1(true);
+  const showTimePicker = () => {
+    setTimePickerVisible(true);
   };
 
-  const hideDatePicker1 = () => {
-    setDatePickerVisible1(false);
+  const hideTimePicker = () => {
+    setTimePickerVisible(false);
   };
 
   const handleConfirm1 = (date) => {
     setSelectedTime(date);
-    hideDatePicker1();
+    hideTimePicker();
   };
   function handleLeftPress() {
     navigation.navigate("Dashboard");
@@ -52,20 +90,8 @@ export default function AddEvent({ navigation }) {
   return (
     <>
       <Header title={"Add Event"} leftImg={"arrowleft"} handleLeftPress={handleLeftPress} />
-      <DateTimePickerModal
-            date={selectedTime}
-            isVisible={datePickerVisible1}
-            mode="time"
-            onConfirm={handleConfirm1}
-            onCancel={hideDatePicker1}
-        /> 
-        <DateTimePickerModal
-            date={selectedDate}
-            isVisible={datePickerVisible}
-            mode="date"
-            onConfirm={handleConfirm}
-            onCancel={hideDatePicker}
-        />
+      <DateTimePickerModal date={selectedTime} isVisible={timePickerVisible} mode="time" onConfirm={handleConfirm1} onCancel={hideTimePicker} />
+      <DateTimePickerModal date={selectedDate} isVisible={datePickerVisible} mode="date" onConfirm={handleConfirm} onCancel={hideDatePicker} />
       <ScrollView style={{ backgroundColor: "white" }}>
         <View style={{ marginTop: "5%" }}>
           <View style={[{ backgroundColor: "#EEEEEE", width: "90%", marginLeft: "5%", height: 50, justifyContent: "center", borderRadius: 35 }, ,]}>
@@ -74,7 +100,7 @@ export default function AddEvent({ navigation }) {
               onChangeText={(text) => handleChangeTxt(text, "eventName")}
               value={eventData.eventName}
               style={[{ textAlignVertical: "center", paddingLeft: "4%", fontSize: 18 }]}
-              placeholderTextColor='black'
+              placeholderTextColor="black"
             />
           </View>
 
@@ -87,34 +113,78 @@ export default function AddEvent({ navigation }) {
               value={eventData.eventDescription}
               style={[{ textAlignVertical: "center", paddingLeft: "4%", fontSize: 18, marginTop: "3", padding: "2%" }]}
               maxLength={200}
-              placeholderTextColor='black'
+              placeholderTextColor="black"
             />
           </View>
 
           <Pressable
-          style={[{ backgroundColor: "#EEEEEE", width: "90%", marginLeft: "5%", height: 50, justifyContent: "center", borderRadius: 35, marginTop: "4%",paddingRight:"2%" }, ,]}
-          onPress={showDatePicker}
+            style={[
+              {
+                backgroundColor: "#EEEEEE",
+                width: "90%",
+                marginLeft: "5%",
+                height: 50,
+                justifyContent: "center",
+                borderRadius: 35,
+                marginTop: "4%",
+                paddingRight: "2%",
+              },
+              ,
+            ]}
+            onPress={showDatePicker}
           >
-            <View style={{flexDirection:'row',justifyContent:'space-between'}}  >
-              <Text style={[{ textAlignVertical: "center", paddingLeft: "4%", fontSize: 18,  }]} >{selectedDate ? selectedDate.toLocaleDateString() : 'Add Date*'}</Text>
+            <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+              <Text style={[{ textAlignVertical: "center", paddingLeft: "4%", fontSize: 18 }]}>
+                {selectedDate ? selectedDate.toLocaleDateString() : "Add Date*"}
+              </Text>
               <AntDesign name="calendar" size={24} color="black" />
             </View>
-            
-            
           </Pressable>
           <Pressable
-          style={[{ backgroundColor: "#EEEEEE", width: "90%", marginLeft: "5%", height: 50, justifyContent: "center", borderRadius: 35, marginTop: "4%",paddingRight:"2%" }, ,]}
-          onPress={showDatePicker1}
+            style={[
+              {
+                backgroundColor: "#EEEEEE",
+                width: "90%",
+                marginLeft: "5%",
+                height: 50,
+                justifyContent: "center",
+                borderRadius: 35,
+                marginTop: "4%",
+                paddingRight: "2%",
+              },
+              ,
+            ]}
+            onPress={showTimePicker}
           >
-            <View style={{flexDirection:'row',justifyContent:'space-between'}} >
-              <Text style={[{ textAlignVertical: "center", paddingLeft: "4%", fontSize: 18,  }]} >{selectedTime ? selectedTime.toLocaleTimeString() : 'Add Time*'}</Text>
-              
+            <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+              <Text style={[{ textAlignVertical: "center", paddingLeft: "4%", fontSize: 18 }]}>
+                {selectedTime ? selectedTime.toLocaleTimeString() : "Add Time*"}
+              </Text>
+
               <AntDesign name="clockcircleo" size={24} color="black" />
             </View>
-            
-            
           </Pressable>
-        </View>
+
+         
+          <CustomDropdown cases={cases} headingtxt={"Add Case*"}   />
+          <CustomDropdown cases={cases} headingtxt={"Add Client"}  />
+
+          <Pressable
+          style={
+            {
+              backgroundColor: "#32A1ED",
+              width: "90%",
+              marginLeft: "5%",
+              height: 50,
+              justifyContent: "center",
+              borderRadius: 8,
+              marginTop: "4%",
+              paddingRight: "2%",
+              marginBottom:"2%"
+            } }>
+            <Text style={{color:'white', alignSelf:'center',fontSize:20,fontWeight:"bold"}}>Create Event</Text>
+          </Pressable>
+        </View> 
       </ScrollView>
     </>
   );
