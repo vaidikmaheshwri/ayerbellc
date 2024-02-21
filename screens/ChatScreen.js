@@ -4,6 +4,9 @@ import Message from "../components/Message";
 import Header from "../components/Header";
 
 const ChatScreen = ({ navigation }) => {
+
+
+  
   const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState("");
 
@@ -17,9 +20,9 @@ const ChatScreen = ({ navigation }) => {
       const newMessage = {
         id: messages.length.toString(),
         text: inputText,
-        isUser: true, // Assuming the user is sending the message
+        isUser: true, 
         time: getCurrentTime(),
-        userPhoto: require("../assets/clientImage.png"), // Example user photo URL
+        userPhoto: require("../assets/clientImage.png"), 
       };
       setMessages([...messages, newMessage]);
       setInputText("");
@@ -36,7 +39,8 @@ const ChatScreen = ({ navigation }) => {
           data={messages}
           renderItem={({ item }) => (
             <View >
-              <Message text={item.text} isUser={item.isUser} time={item.time} userPhoto={item.userPhoto} />
+
+              <Message text={item.text} isUser={item.isUser} time={item.time} userPhoto={item.userPhoto}  />
               {/* <Image source={require('../assets/clientImage.png')} style={{width:45, height:45, borderRadius:22.5}} /> */}
             </View>
           )}
