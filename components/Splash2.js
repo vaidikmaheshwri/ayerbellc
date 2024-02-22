@@ -1,28 +1,34 @@
 import { View, Text,StyleSheet, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import SignIn from './SignIn';
-import {useFonts} from 'expo-font';
+import { useDispatch, useSelector } from 'react-redux';
+
+  import { setUserRole } from '../slice/roleSlice';
 export default function Splash2({navigation}) {
-    const [fontsLoaded] = useFonts({
-        'Montserrat-Bold': require('../assets/fonts/Montserrat-Bold.ttf'),
-        'Montserrat-Regular':require('../assets/fonts/Montserrat-Regular.ttf'),
-        'Montserrat-Medium':require('../assets/fonts/Montserrat-Medium.ttf'),
-        'Montserrat-Light':require('../assets/fonts/Montserrat-Light.ttf') 
-    });
-    if(!fontsLoaded) return undefined; // Avoid rendering new components without fonts loaded.
+  const dispatch= useDispatch();
+   const role = useSelector((state)=>state.role.role);
+   function associateHandler(str){
+    dispatch(setUserRole(str));
+    navigation.navigate('SignIn');
+   }
+   function clientHandler(str){
+    dispatch(setUserRole(str));
+    navigation.navigate('SignIn');
+   }
+
   return (
     <View style={styles.container} >
        <Image source={require("../assets/SplashScreen.png")} style={styles.bgImg} />
        <Image source={require("../assets/logowhite.png")} style={styles.logo} />
        <View style={styles.btnContainer}>
        <TouchableOpacity style={styles.btn1}
-       onPress={()=>navigation.navigate('SignIn')}
+       onPress={()=>associateHandler('associate')}
        >
         <Text style={{color:'white', textAlign:'center',fontSize:20}}>Continue as Associate</Text>
        </TouchableOpacity>
        
        <TouchableOpacity style={styles.btn2}
-       onPress={()=>navigation.navigate('SignIn')}
+       onPress={()=>clientHandler('client')}
        >
         <Text style={{color:'white', textAlign:'center',fontSize:20}}>Continue as Client</Text>
        </TouchableOpacity>

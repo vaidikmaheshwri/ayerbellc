@@ -1,10 +1,29 @@
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, TouchableHighlight } from "react-native";
 import React, { useState } from "react";
-
+import { useDispatch } from "react-redux";
+import { getUserFetch } from "../slice/userSlice";
 export default function SignIn({navigation}) {
+  const role = useSelector((state)=>state.role.role);
+   const dispatch= useDispatch();
+   
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [radioBtn, SetRadioBtn] =useState(1);
+
+  const  handleSignIn=()=>{
+    const signInData = {
+      email, 
+      password,
+      role,
+      fcmToken:'123456'
+    }
+    if (email === "" || password === "") return alert('Please enter all fields');
+    // dispatch(getUserFetch(signInData));
+    navigation.navigate(
+      'Dashboard'
+    );
+  }
   return (
     <View style={styles.container}>
       
@@ -71,7 +90,7 @@ export default function SignIn({navigation}) {
         </View>
         <View style={styles.signInSection}>
           <TouchableOpacity
-          onPress={()=>navigation.navigate('Dashboard')}
+          onPress={()=>handleSignIn()}
           style={styles.signInBtn}
           >
             <Text  style={styles.signInText}>Sign In</Text>
