@@ -1,8 +1,9 @@
-import { takeLatest, put, call ,all} from 'redux-saga/effects';
-import { getUserFetch,getUserFailure,getUserSuccess } from '../slice/userSlice';
-import { loginUser } from '../saga/loginUser';
+import { takeLatest, put, call, all } from "redux-saga/effects";
+import { getUserFetch, logoutFetch } from "../slice/userSlice";
+import { loginUserSaga } from "../saga/loginUserSaga";
+import { logoutSaga } from "../saga/logoutSaga";
 
-export default function *sagas(){
-    yield all([takeLatest(getUserFetch.type,loginUser)]);
-
+export default function* sagas() {
+  yield takeLatest(getUserFetch.type, loginUserSaga);
+  yield takeLatest(logoutFetch.type, logoutSaga);
 }

@@ -10,7 +10,7 @@ const config = {
   key: "root",
   storage: AsyncStorage,
   //   debug: true,
-  //   blacklist: ['BottomTab', 'Activity'],
+  blacklist: ["user"],
 };
 
 const sagaMiddleware = createSagaMiddleware();

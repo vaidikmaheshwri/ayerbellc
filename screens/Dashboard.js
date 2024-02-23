@@ -1,6 +1,6 @@
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, TouchableHighlight, SafeAreaView, ScrollView, Dimensions, FlatList } from "react-native";
 import React, { useState } from "react";
-
+import { useSelector } from "react-redux";
 
 const ScreenWidth = Dimensions.get("window").width;
 const clientList = [
@@ -131,8 +131,12 @@ const taskslist = [
 ];
 export default function Dashboard({ navigation }) {
   const [txt, setTxt] = useState("");
+  const user = useSelector((state) => state.user.user);
+  console.log("u r in dashboard");
   return (
     <>
+      {console.log("user in dashboard=>>>>>>>",user)}
+
       <ScrollView style={styles.container}>
         <View style={styles.searchSection}>
           <Image style={styles.searchIcon} source={require("../assets/dashboardIcons/search.png")} />
@@ -154,7 +158,7 @@ export default function Dashboard({ navigation }) {
               data={clientList.slice(0, 5)}
               showsHorizontalScrollIndicator={false}
               renderItem={({ item }) => (
-                <TouchableOpacity onPress={()=>navigation.navigate('ClientDetails')}>
+                <TouchableOpacity onPress={() => navigation.navigate("ClientDetails")}>
                   <View style={{ paddingRight: 15, flexDirection: "column", height: 200, gap: 4 }}>
                     <Image source={item.image} style={{ width: 145, height: 145 }} />
                     <Text style={{ fontSize: 14 }}>{item.name}</Text>
@@ -178,7 +182,7 @@ export default function Dashboard({ navigation }) {
               style={{ top: 15, paddingLeft: 15, height: 170 }}
               horizontal={true}
               showsHorizontalScrollIndicator={false}
-              data={EventList.slice(0,5)}
+              data={EventList.slice(0, 5)}
               renderItem={({ item }) => (
                 <TouchableHighlight>
                   <View
@@ -295,7 +299,6 @@ export default function Dashboard({ navigation }) {
           ) : null}
         </View>
       </ScrollView>
-    
     </>
   );
 }
